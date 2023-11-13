@@ -46,7 +46,7 @@ import {
   setWhiteSidenav,
 } from "context";
 
-function Sidenav({ color, brand, brandName, routes, ...rest }) {
+function Sidenav({ signOut, color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
   const location = useLocation();
@@ -170,6 +170,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             </MDTypography>
           </MDBox>
         </MDBox>
+
       </MDBox>
       <Divider
         light={
@@ -177,7 +178,22 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           (darkMode && !transparentSidenav && whiteSidenav)
         }
       />
-      <List>{renderRoutes}</List>
+      <List>{renderRoutes}
+      <MDBox
+                color={textColor}
+                display="block"
+                variant="caption"
+                backgroundColor="red"
+                cursor='pointer'
+                pl={3}
+                mt={2}
+                mb={1}
+                ml={1}
+                onClick={ signOut }
+      >
+          signOut
+        </MDBox>
+      </List>
     </SidenavRoot>
   );
 }

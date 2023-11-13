@@ -17,6 +17,9 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "App";
+import { Amplify } from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
 
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";

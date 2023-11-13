@@ -1,0 +1,30 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify95898e02c4004-staging-194524-authRole",
+      "UnauthRoleArn": "arn:aws:iam::633211861656:role/amplify-amplify95898e02c4004-staging-194524-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::633211861656:role/amplify-amplify95898e02c4004-staging-194524-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-amplify95898e02c4004-staging-194524-deployment",
+      "UnauthRoleName": "amplify-amplify95898e02c4004-staging-194524-unauthRole",
+      "StackName": "amplify-amplify95898e02c4004-staging-194524",
+      "StackId": "arn:aws:cloudformation:us-east-2:633211861656:stack/amplify-amplify95898e02c4004-staging-194524/b13f6ab0-8001-11ee-b24d-02d7fb8eb319",
+      "AmplifyAppId": "dc7h9v8hnqt32",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-amplify95898e02c4004-staging-194524-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "attendancesystem": {}
+      },
+      "function": {
+        "attendancesystemPreSignup": {
+          "deploymentBucketName": "amplify-amplify95898e02c4004-staging-194524-deployment",
+          "s3Key": "amplify-builds/attendancesystemPreSignup-464c6851365166707263-build.zip"
+        }
+      },
+      "api": {
+        "attendancesystem": {}
+      }
+    }
+  }
+}

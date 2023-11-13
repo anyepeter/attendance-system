@@ -52,8 +52,12 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
+import Verify from "layouts/authentication/verify";
 
-export default function App() {
+import "@aws-amplify/ui-react/styles.css";
+
+ function App() {
+
   const [controller, dispatch] = useMaterialUIController();
   const {
     miniSidenav,
@@ -111,6 +115,7 @@ export default function App() {
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
+      
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
@@ -167,7 +172,7 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ThemeProvider>
     </CacheProvider>
@@ -183,6 +188,7 @@ export default function App() {
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
+
           />
           <Configurator />
           {configsButton}
@@ -191,8 +197,12 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="*" element={<Navigate to="/" />} />
+        <Route path='/verify' element={<Verify /> } />
       </Routes>
     </ThemeProvider>
   );
 }
+
+
+export default App;

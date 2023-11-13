@@ -13,13 +13,16 @@
     "url": "git+https://github.com/creativetimofficial/material-dashboard-react.git"
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^5.3.2",
     "@emotion/cache": "11.10.8",
     "@emotion/react": "11.10.8",
     "@emotion/styled": "11.10.8",
     "@mui/icons-material": "5.11.16",
     "@mui/material": "5.12.3",
+    "aws-amplify": "^5.3.12",
     "chart.js": "4.3.0",
     "chroma-js": "2.4.2",
+    "node-fetch": "^2.7.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-chartjs-2": "5.2.0",
