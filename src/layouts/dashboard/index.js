@@ -35,9 +35,16 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
+import { useSelector } from "react-redux";
+
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
-  
+  const count = useSelector((state) => state.user.user)
+
+  const userType = count['custom:userType'];
+
+
+   console.log(userType)
 
   return (
     <DashboardLayout>
@@ -58,21 +65,28 @@ function Dashboard() {
               />
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="primary"
-                icon="person_add"
-                title="Followers"
-                count="+91"
-                percentage={{
-                  color: "success",
-                  amount: "",
-                  label: "Just updated",
-                }}
-              />
-            </MDBox>
-          </Grid>
+
+          {
+  userType === 'teacher' && (
+    <Grid item xs={12} md={6} lg={3}>
+      <MDBox mb={1.5}>
+        <ComplexStatisticsCard
+          color="primary"
+          icon="person_add"
+          title="Followers"
+          count="+91"
+          percentage={{
+            color: "success",
+            amount: "",
+            label: "Just updated",
+          }}
+        />
+      </MDBox>
+    </Grid>
+  )
+}
+
+         
         </Grid>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>

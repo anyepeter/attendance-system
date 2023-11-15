@@ -52,7 +52,7 @@ export default function DayUpdateForm(props) {
   }, [idProp, dayModelProp]);
   React.useEffect(resetStateValues, [dayRecord]);
   const validations = {
-    date: [],
+    date: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -80,7 +80,7 @@ export default function DayUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          date: date ?? null,
+          date,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -134,7 +134,7 @@ export default function DayUpdateForm(props) {
     >
       <TextField
         label="Date"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={date}
         onChange={(e) => {

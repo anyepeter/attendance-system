@@ -31,7 +31,7 @@ export default function DayCreateForm(props) {
     setErrors({});
   };
   const validations = {
-    date: [],
+    date: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -115,7 +115,7 @@ export default function DayCreateForm(props) {
     >
       <TextField
         label="Date"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={date}
         onChange={(e) => {

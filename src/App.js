@@ -48,7 +48,6 @@ import Basic from "layouts/authentication/sign-in";
 import Cover from "layouts/authentication/sign-up";
 import { useDispatch } from 'react-redux';
 import { login } from "redux/attendanceSlice";
-import { useSelector } from "react-redux";
 
 
  function App() {
@@ -115,15 +114,11 @@ import { useSelector } from "react-redux";
     fetchData();
   }, []);
 
- const isAuthenticated = !!userInfo;
+ 
 
- console.log(userInfo.name);
+ const isAuthenticated = !!userInfo;
   
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
-
-  const count = useSelector((state) => state.user.user)
-
-  console.log(count);
 
   // Setting the dir attribute for the body element
   useEffect(() => {
