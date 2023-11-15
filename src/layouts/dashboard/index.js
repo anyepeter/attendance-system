@@ -37,6 +37,7 @@ import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
+  
 
   return (
     <DashboardLayout>

@@ -6,26 +6,28 @@ import { Card } from '@mui/material';
 import MDTypography from 'components/MDTypography';
 import MDInput from 'components/MDInput';
 import MDButton from 'components/MDButton';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+
 
 const Verify = () => {
 
     const location = useLocation();
     const username = location.state.userData.email;
-    console.log(username)
+    const navigate = useNavigate()
 
     const [code, setCode] = useState('')
 
     const handleInputChange = (event) => {
         setCode(event.target.value);
     };
-console.log(code)
     const  handleSubmit = async (event) => {
         event.preventDefault()
         try {
             await Auth.confirmSignUp(username, code);
             console.log('Sign-up successful');
+            navigate('/dashboard')
+            
           } catch (error) {
             console.log('error confirming sign up', error);
           }

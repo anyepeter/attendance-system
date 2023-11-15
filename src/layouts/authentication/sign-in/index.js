@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -34,6 +34,8 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
+import { useNavigate } from "react-router-dom";
+
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
@@ -41,8 +43,18 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { Auth } from 'aws-amplify';
+
+//Notification
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate()
+  const [formSubmit, setFormSubmit] = useState(false);
+  const [error, setError] = useState(false);
+  const notify = () => toast("Wow so easy!");
+  const badText = () => toast("Wrong text!");
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -59,20 +71,41 @@ function Basic() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setFormSubmit(true);
+
     try {
-      await Auth.signIn({
-        username: loginData.email, 
-        password: loginData.password});
-      console.log('Sign-in successful');
+      const userInfo = {
+        username: loginData.email,
+        password: loginData.password,
+      };
+      await Auth.signIn(userInfo);
+      setTimeout(() => {
+        window.location.load(navigate('/dashboard'));
+      }, 1000);
+      setFormSubmit(false);
     } catch (err) {
       console.log(err);
+      setError(true);
+      setFormSubmit(false);
+      badText();
     }
-  }
+  };
 
-  
+  useEffect(() => {
+    if (formSubmit && !error) {
+      return( notify)
+    }
+    if (formSubmit && error) {
+      setError(false);
+      return(badText)
+    }
+
+    
+  }, [formSubmit, error]);
 
   return (
     <BasicLayout image={bgImage}>
+      <ToastContainer />
       <Card>
         <MDBox
           variant="gradient"
@@ -139,7 +172,12 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" type="submit" color="info" fullWidth>
+              <MDButton
+               variant="gradient" 
+               type="submit"
+                color="info"
+                disabled={formSubmit}
+                 fullWidth>
                 sign in
               </MDButton>
             </MDBox>

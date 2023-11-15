@@ -20,6 +20,8 @@ import App from "App";
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports';
 Amplify.configure(config);
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
@@ -29,8 +31,10 @@ const root = createRoot(container);
 
 root.render(
   <BrowserRouter>
+  <Provider store={store}>
     <MaterialUIControllerProvider>
       <App />
     </MaterialUIControllerProvider>
+    </Provider>
   </BrowserRouter>
 );

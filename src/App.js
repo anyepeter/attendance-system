@@ -1,17 +1,4 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 import { useState, useEffect, useMemo } from "react";
 
@@ -48,16 +35,23 @@ import routes from "routes";
 
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
+import { Auth } from 'aws-amplify'
 
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
-import Verify from "layouts/authentication/verify";
-
 import "@aws-amplify/ui-react/styles.css";
 
- function App() {
+//Authentification
+import Verify from "layouts/authentication/verify";
+import Basic from "layouts/authentication/sign-in";
+import Cover from "layouts/authentication/sign-up";
+import { useDispatch } from 'react-redux';
+import { login } from "redux/attendanceSlice";
+import { useSelector } from "react-redux";
 
+
+ function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
     miniSidenav,
@@ -72,6 +66,7 @@ import "@aws-amplify/ui-react/styles.css";
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+
 
   // Cache for the rtl
   useMemo(() => {
@@ -99,8 +94,36 @@ import "@aws-amplify/ui-react/styles.css";
     }
   };
 
-  // Change the openConfigurator state
+  const [loading, setLoading] = useState(true);
+
+  const [userInfo, setUserData] = useState({});
+  const dispatchRedux = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser({ bypassCache: false });
+        setUserData(user.attributes);
+        dispatchRedux(login(user.attributes));
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+ const isAuthenticated = !!userInfo;
+
+ console.log(userInfo.name);
+  
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+
+  const count = useSelector((state) => state.user.user)
+
+  console.log(count);
 
   // Setting the dir attribute for the body element
   useEffect(() => {
@@ -111,11 +134,12 @@ import "@aws-amplify/ui-react/styles.css";
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
-  }, [pathname]);
+  }, [pathname]); 
 
-  const getRoutes = (allRoutes) =>
-    allRoutes.map((route) => {
-      
+
+const getRoutes = (allRoutes) =>
+  allRoutes
+    .map((route) => {
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
@@ -125,7 +149,9 @@ import "@aws-amplify/ui-react/styles.css";
       }
 
       return null;
-    });
+    })
+    .flat();
+
 
   const configsButton = (
     <MDBox
@@ -151,11 +177,15 @@ import "@aws-amplify/ui-react/styles.css";
     </MDBox>
   );
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
       <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
         <CssBaseline />
-        {layout === "dashboard" && (
+        { isAuthenticated && layout === "dashboard" && (
           <>
             <Sidenav
               color={sidenavColor}
@@ -171,7 +201,9 @@ import "@aws-amplify/ui-react/styles.css";
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
-          {getRoutes(routes)}
+          {
+            isAuthenticated? getRoutes(routes) : <Route path="/" element={<Basic />} />
+          }
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </ThemeProvider>
@@ -179,7 +211,7 @@ import "@aws-amplify/ui-react/styles.css";
   ) : (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
-      {layout === "dashboard" && (
+      { isAuthenticated && layout === "dashboard" && (
         <>
           <Sidenav
             color={sidenavColor}
@@ -196,8 +228,12 @@ import "@aws-amplify/ui-react/styles.css";
       )}
       {layout === "vr" && <Configurator />}
       <Routes>
-        {getRoutes(routes)}
+      {
+            isAuthenticated? getRoutes(routes) : <Route path="/" element={<Basic />} />
+          }
+        <Route path="/" element={<Basic />} />
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/signUp" element={<Cover />} />
         <Route path='/verify' element={<Verify /> } />
       </Routes>
     </ThemeProvider>
