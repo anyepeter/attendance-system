@@ -20,6 +20,8 @@ import Card from "@mui/material/Card";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDButton from "components/MDButton";
+import { IoMdAdd } from "react-icons/io";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -31,14 +33,34 @@ import DataTable from "examples/Tables/DataTable";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
+import { useNavigate } from "react-router-dom";
+
 function Tables() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate('/addCourse')
+  }
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      <MDBox pt={4} pb={3}>
+      <MDButton
+               variant="gradient" 
+               type="submit"
+                color="info"
+                 mb="5"
+                 sx={{
+                  marginBottom: "5rem"
+                 }} 
+                 
+                 onClick={handleClick}>
+                <IoMdAdd />
+              </MDButton>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>

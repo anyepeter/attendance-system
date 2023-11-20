@@ -1,42 +1,42 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateAttendance = /* GraphQL */ `
-  subscription OnCreateAttendance(
-    $filter: ModelSubscriptionAttendanceFilterInput
-  ) {
-    onCreateAttendance(filter: $filter) {
+export const onCreateAttend = /* GraphQL */ `
+  subscription OnCreateAttend($filter: ModelSubscriptionAttendFilterInput) {
+    onCreateAttend(filter: $filter) {
       id
       present
+      dayID
       userID
+      courseID
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const onUpdateAttendance = /* GraphQL */ `
-  subscription OnUpdateAttendance(
-    $filter: ModelSubscriptionAttendanceFilterInput
-  ) {
-    onUpdateAttendance(filter: $filter) {
+export const onUpdateAttend = /* GraphQL */ `
+  subscription OnUpdateAttend($filter: ModelSubscriptionAttendFilterInput) {
+    onUpdateAttend(filter: $filter) {
       id
       present
+      dayID
       userID
+      courseID
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const onDeleteAttendance = /* GraphQL */ `
-  subscription OnDeleteAttendance(
-    $filter: ModelSubscriptionAttendanceFilterInput
-  ) {
-    onDeleteAttendance(filter: $filter) {
+export const onDeleteAttend = /* GraphQL */ `
+  subscription OnDeleteAttend($filter: ModelSubscriptionAttendFilterInput) {
+    onDeleteAttend(filter: $filter) {
       id
       present
+      dayID
       userID
+      courseID
       createdAt
       updatedAt
       __typename
@@ -47,8 +47,12 @@ export const onCreateDay = /* GraphQL */ `
   subscription OnCreateDay($filter: ModelSubscriptionDayFilterInput) {
     onCreateDay(filter: $filter) {
       id
-      date
+      name
       Courses {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -62,8 +66,12 @@ export const onUpdateDay = /* GraphQL */ `
   subscription OnUpdateDay($filter: ModelSubscriptionDayFilterInput) {
     onUpdateDay(filter: $filter) {
       id
-      date
+      name
       Courses {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -77,11 +85,96 @@ export const onDeleteDay = /* GraphQL */ `
   subscription OnDeleteDay($filter: ModelSubscriptionDayFilterInput) {
     onDeleteDay(filter: $filter) {
       id
-      date
+      name
       Courses {
         nextToken
         __typename
       }
+      Attends {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onCreateEnroll = /* GraphQL */ `
+  subscription OnCreateEnroll($filter: ModelSubscriptionEnrollFilterInput) {
+    onCreateEnroll(filter: $filter) {
+      id
+      status
+      userID
+      courseID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateEnroll = /* GraphQL */ `
+  subscription OnUpdateEnroll($filter: ModelSubscriptionEnrollFilterInput) {
+    onUpdateEnroll(filter: $filter) {
+      id
+      status
+      userID
+      courseID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteEnroll = /* GraphQL */ `
+  subscription OnDeleteEnroll($filter: ModelSubscriptionEnrollFilterInput) {
+    onDeleteEnroll(filter: $filter) {
+      id
+      status
+      userID
+      courseID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onCreateUserCourse = /* GraphQL */ `
+  subscription OnCreateUserCourse(
+    $filter: ModelSubscriptionUserCourseFilterInput
+  ) {
+    onCreateUserCourse(filter: $filter) {
+      id
+      courseID
+      userID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateUserCourse = /* GraphQL */ `
+  subscription OnUpdateUserCourse(
+    $filter: ModelSubscriptionUserCourseFilterInput
+  ) {
+    onUpdateUserCourse(filter: $filter) {
+      id
+      courseID
+      userID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteUserCourse = /* GraphQL */ `
+  subscription OnDeleteUserCourse(
+    $filter: ModelSubscriptionUserCourseFilterInput
+  ) {
+    onDeleteUserCourse(filter: $filter) {
+      id
+      courseID
+      userID
       createdAt
       updatedAt
       __typename
@@ -94,8 +187,19 @@ export const onCreateCourse = /* GraphQL */ `
       id
       title
       code
-      userID
+      UserCourses {
+        nextToken
+        __typename
+      }
+      Enrolls {
+        nextToken
+        __typename
+      }
       dayID
+      Attends {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -108,8 +212,19 @@ export const onUpdateCourse = /* GraphQL */ `
       id
       title
       code
-      userID
+      UserCourses {
+        nextToken
+        __typename
+      }
+      Enrolls {
+        nextToken
+        __typename
+      }
       dayID
+      Attends {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -122,8 +237,19 @@ export const onDeleteCourse = /* GraphQL */ `
       id
       title
       code
-      userID
+      UserCourses {
+        nextToken
+        __typename
+      }
+      Enrolls {
+        nextToken
+        __typename
+      }
       dayID
+      Attends {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -137,11 +263,15 @@ export const onCreateUser = /* GraphQL */ `
       name
       email
       userType
-      Courses {
+      UserCourses {
         nextToken
         __typename
       }
-      Attendances {
+      Enrolls {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -158,11 +288,15 @@ export const onUpdateUser = /* GraphQL */ `
       name
       email
       userType
-      Courses {
+      UserCourses {
         nextToken
         __typename
       }
-      Attendances {
+      Enrolls {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -179,11 +313,15 @@ export const onDeleteUser = /* GraphQL */ `
       name
       email
       userType
-      Courses {
+      UserCourses {
         nextToken
         __typename
       }
-      Attendances {
+      Enrolls {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }

@@ -22,15 +22,15 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type DayCreateFormInputValues = {
-    date?: string;
+    name?: string;
 };
 export declare type DayCreateFormValidationValues = {
-    date?: ValidationFunction<string>;
+    name?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type DayCreateFormOverridesProps = {
     DayCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    date?: PrimitiveOverrideProps<TextFieldProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type DayCreateFormProps = React.PropsWithChildren<{
     overrides?: DayCreateFormOverridesProps | undefined | null;

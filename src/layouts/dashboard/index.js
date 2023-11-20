@@ -1,19 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
@@ -30,59 +14,68 @@ import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatist
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
-
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
-
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchAllUsers, fetchAllEnrollments } from "redux/attendanceSlice";
 
 function Dashboard() {
-  const { sales, tasks } = reportsLineChartData;
+  const dispatch = useDispatch()
   const count = useSelector((state) => state.user.user)
+  const allUsers = useSelector((state) => state.user.allUser)
+  
+  // const [filterArr, setFilterArr] = useState([])
 
-  const userType = count['custom:userType'];
+  const [userType, setUserType] = useState('')
+  console.log(count)
 
+   useEffect(() => {
+   
+    const settimeout = setTimeout(() => {
+      setUserType(count['custom:userType'])
+    }, 1000)
+
+    return () => clearTimeout(settimeout)
+   }, []);
 
    console.log(userType)
+
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+    dispatch(fetchAllEnrollments())
+  }, [dispatch])
+
+
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
-                percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
-                }}
-              />
-            </MDBox>
-          </Grid>
 
-          {
-  userType === 'teacher' && (
-    <Grid item xs={12} md={6} lg={3}>
+        <Grid item xs={12} md={6} lg={3}>
       <MDBox mb={1.5}>
         <ComplexStatisticsCard
           color="primary"
           icon="person_add"
-          title="Followers"
+          title="Number of Students"
           count="+91"
-          percentage={{
-            color: "success",
-            amount: "",
-            label: "Just updated",
-          }}
         />
       </MDBox>
     </Grid>
+          {
+  userType === 'teacher' && (
+    <Grid item xs={12} md={6} lg={3}>
+    <MDBox mb={1.5}>
+      <ComplexStatisticsCard
+        icon="leaderboard"
+        title="Number of Courses"
+        count="2,300"
+      />
+    </MDBox>
+  </Grid>
   )
 }
 
@@ -94,9 +87,9 @@ function Dashboard() {
               <MDBox mb={3}>
                 <ReportsBarChart
                   color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
+                  title="Weekly attendances"
+                  description="Avarage attendances of students"
+                  date="Weekly"
                   chart={reportsBarChartData}
                 />
               </MDBox>

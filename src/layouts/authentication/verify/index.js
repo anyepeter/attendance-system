@@ -32,7 +32,7 @@ const Verify = () => {
             console.log('error confirming sign up', error);
           }
     }
-
+ 
     return(
         <BasicLayout image={bgImage}>
             <Card 

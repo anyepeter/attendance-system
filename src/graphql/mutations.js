@@ -1,45 +1,51 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createAttendance = /* GraphQL */ `
-  mutation CreateAttendance(
-    $input: CreateAttendanceInput!
-    $condition: ModelAttendanceConditionInput
+export const createAttend = /* GraphQL */ `
+  mutation CreateAttend(
+    $input: CreateAttendInput!
+    $condition: ModelAttendConditionInput
   ) {
-    createAttendance(input: $input, condition: $condition) {
+    createAttend(input: $input, condition: $condition) {
       id
       present
+      dayID
       userID
+      courseID
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const updateAttendance = /* GraphQL */ `
-  mutation UpdateAttendance(
-    $input: UpdateAttendanceInput!
-    $condition: ModelAttendanceConditionInput
+export const updateAttend = /* GraphQL */ `
+  mutation UpdateAttend(
+    $input: UpdateAttendInput!
+    $condition: ModelAttendConditionInput
   ) {
-    updateAttendance(input: $input, condition: $condition) {
+    updateAttend(input: $input, condition: $condition) {
       id
       present
+      dayID
       userID
+      courseID
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const deleteAttendance = /* GraphQL */ `
-  mutation DeleteAttendance(
-    $input: DeleteAttendanceInput!
-    $condition: ModelAttendanceConditionInput
+export const deleteAttend = /* GraphQL */ `
+  mutation DeleteAttend(
+    $input: DeleteAttendInput!
+    $condition: ModelAttendConditionInput
   ) {
-    deleteAttendance(input: $input, condition: $condition) {
+    deleteAttend(input: $input, condition: $condition) {
       id
       present
+      dayID
       userID
+      courseID
       createdAt
       updatedAt
       __typename
@@ -53,8 +59,12 @@ export const createDay = /* GraphQL */ `
   ) {
     createDay(input: $input, condition: $condition) {
       id
-      date
+      name
       Courses {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -71,8 +81,12 @@ export const updateDay = /* GraphQL */ `
   ) {
     updateDay(input: $input, condition: $condition) {
       id
-      date
+      name
       Courses {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -89,11 +103,108 @@ export const deleteDay = /* GraphQL */ `
   ) {
     deleteDay(input: $input, condition: $condition) {
       id
-      date
+      name
       Courses {
         nextToken
         __typename
       }
+      Attends {
+        nextToken
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createEnroll = /* GraphQL */ `
+  mutation CreateEnroll(
+    $input: CreateEnrollInput!
+    $condition: ModelEnrollConditionInput
+  ) {
+    createEnroll(input: $input, condition: $condition) {
+      id
+      status
+      userID
+      courseID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateEnroll = /* GraphQL */ `
+  mutation UpdateEnroll(
+    $input: UpdateEnrollInput!
+    $condition: ModelEnrollConditionInput
+  ) {
+    updateEnroll(input: $input, condition: $condition) {
+      id
+      status
+      userID
+      courseID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteEnroll = /* GraphQL */ `
+  mutation DeleteEnroll(
+    $input: DeleteEnrollInput!
+    $condition: ModelEnrollConditionInput
+  ) {
+    deleteEnroll(input: $input, condition: $condition) {
+      id
+      status
+      userID
+      courseID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createUserCourse = /* GraphQL */ `
+  mutation CreateUserCourse(
+    $input: CreateUserCourseInput!
+    $condition: ModelUserCourseConditionInput
+  ) {
+    createUserCourse(input: $input, condition: $condition) {
+      id
+      courseID
+      userID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateUserCourse = /* GraphQL */ `
+  mutation UpdateUserCourse(
+    $input: UpdateUserCourseInput!
+    $condition: ModelUserCourseConditionInput
+  ) {
+    updateUserCourse(input: $input, condition: $condition) {
+      id
+      courseID
+      userID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteUserCourse = /* GraphQL */ `
+  mutation DeleteUserCourse(
+    $input: DeleteUserCourseInput!
+    $condition: ModelUserCourseConditionInput
+  ) {
+    deleteUserCourse(input: $input, condition: $condition) {
+      id
+      courseID
+      userID
       createdAt
       updatedAt
       __typename
@@ -109,8 +220,19 @@ export const createCourse = /* GraphQL */ `
       id
       title
       code
-      userID
+      UserCourses {
+        nextToken
+        __typename
+      }
+      Enrolls {
+        nextToken
+        __typename
+      }
       dayID
+      Attends {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -126,8 +248,19 @@ export const updateCourse = /* GraphQL */ `
       id
       title
       code
-      userID
+      UserCourses {
+        nextToken
+        __typename
+      }
+      Enrolls {
+        nextToken
+        __typename
+      }
       dayID
+      Attends {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -143,8 +276,19 @@ export const deleteCourse = /* GraphQL */ `
       id
       title
       code
-      userID
+      UserCourses {
+        nextToken
+        __typename
+      }
+      Enrolls {
+        nextToken
+        __typename
+      }
       dayID
+      Attends {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -161,11 +305,15 @@ export const createUser = /* GraphQL */ `
       name
       email
       userType
-      Courses {
+      UserCourses {
         nextToken
         __typename
       }
-      Attendances {
+      Enrolls {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -185,11 +333,15 @@ export const updateUser = /* GraphQL */ `
       name
       email
       userType
-      Courses {
+      UserCourses {
         nextToken
         __typename
       }
-      Attendances {
+      Enrolls {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }
@@ -209,11 +361,15 @@ export const deleteUser = /* GraphQL */ `
       name
       email
       userType
-      Courses {
+      UserCourses {
         nextToken
         __typename
       }
-      Attendances {
+      Enrolls {
+        nextToken
+        __typename
+      }
+      Attends {
         nextToken
         __typename
       }

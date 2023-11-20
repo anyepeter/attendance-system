@@ -1,28 +1,47 @@
-type Attendance @model @auth(rules: [{allow: public}]) {
+type Attend @model @auth(rules: [{ allow: public }]) {
   id: ID!
   present: Boolean
-  userID: ID! @index(name: "byUser")
-}
-
-type Day @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  date: String!
-  Courses: [Course] @hasMany(indexName: "byDay", fields: ["id"])
-}
-
-type Course @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  title: String!
-  code: String
-  userID: ID! @index(name: "byUser")
   dayID: ID! @index(name: "byDay")
+  userID: AWSEmail! @index(name: "byUser")
+  courseID: ID! @index(name: "byCourse")
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type Day @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String
+  Courses: [Course] @hasMany(indexName: "byDay", fields: ["id"])
+  Attends: [Attend] @hasMany(indexName: "byDay", fields: ["id"])
+}
+
+type Enroll @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  status: Boolean
+  userID: AWSEmail! @index(name: "byUser")
+  courseID: ID! @index(name: "byCourse")
+}
+
+type UserCourse @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  courseID: ID! @index(name: "byCourse")
+  userID: AWSEmail! @index(name: "byUser")
+}
+
+type Course @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  title: String
+  code: Int
+  UserCourses: [UserCourse] @hasMany(indexName: "byCourse", fields: ["id"])
+  Enrolls: [Enroll] @hasMany(indexName: "byCourse", fields: ["id"])
+  dayID: ID! @index(name: "byDay")
+  Attends: [Attend] @hasMany(indexName: "byCourse", fields: ["id"])
+}
+
+type User @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  name: String!
   email: AWSEmail
   userType: String
-  Courses: [Course] @hasMany(indexName: "byUser", fields: ["id"])
-  Attendances: [Attendance] @hasMany(indexName: "byUser", fields: ["id"])
-} 
+  UserCourses: [UserCourse] @hasMany(indexName: "byUser", fields: ["email"])
+  Enrolls: [Enroll] @hasMany(indexName: "byUser", fields: ["email"])
+  Attends: [Attend] @hasMany(indexName: "byUser", fields: ["email"])
+}

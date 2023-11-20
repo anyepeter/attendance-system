@@ -22,16 +22,16 @@ export default function DayCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    date: "",
+    name: "",
   };
-  const [date, setDate] = React.useState(initialValues.date);
+  const [name, setName] = React.useState(initialValues.name);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setDate(initialValues.date);
+    setName(initialValues.name);
     setErrors({});
   };
   const validations = {
-    date: [{ type: "Required" }],
+    name: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -59,7 +59,7 @@ export default function DayCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          date,
+          name,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -114,28 +114,28 @@ export default function DayCreateForm(props) {
       {...rest}
     >
       <TextField
-        label="Date"
-        isRequired={true}
+        label="Name"
+        isRequired={false}
         isReadOnly={false}
-        value={date}
+        value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              date: value,
+              name: value,
             };
             const result = onChange(modelFields);
-            value = result?.date ?? value;
+            value = result?.name ?? value;
           }
-          if (errors.date?.hasError) {
-            runValidationTasks("date", value);
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
           }
-          setDate(value);
+          setName(value);
         }}
-        onBlur={() => runValidationTasks("date", date)}
-        errorMessage={errors.date?.errorMessage}
-        hasError={errors.date?.hasError}
-        {...getOverrideProps(overrides, "date")}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
       <Flex
         justifyContent="space-between"

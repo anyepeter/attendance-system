@@ -1,19 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/function-component-definition */
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 // @mui material components
 import Tooltip from "@mui/material/Tooltip";
@@ -71,15 +55,14 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "companies", accessor: "companies", width: "45%", align: "left" },
-      { Header: "members", accessor: "members", width: "10%", align: "left" },
-      { Header: "budget", accessor: "budget", align: "center" },
-      { Header: "completion", accessor: "completion", align: "center" },
+      { Header: "Courses", accessor: "companies", width: "45%", align: "left" },
+      { Header: "Students", accessor: "members", width: "10%", align: "left" },
+      { Header: "Attendances", accessor: "budget", align: "center" },
     ],
 
     rows: [
       {
-        companies: <Company image={logoXD} name="Material UI XD Version" />,
+        companies: <Company image={logoXD} name="Internet programming" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -92,17 +75,13 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $14,000
+            14%
           </MDTypography>
         ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={60} color="info" variant="gradient" label={false} />
-          </MDBox>
-        ),
+
       },
       {
-        companies: <Company image={logoAtlassian} name="Add Progress Track" />,
+        companies: <Company image={logoAtlassian} name="French" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -113,17 +92,12 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $3,000
+            %40
           </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={10} color="info" variant="gradient" label={false} />
-          </MDBox>
         ),
       },
       {
-        companies: <Company image={logoSlack} name="Fix Platform Errors" />,
+        companies: <Company image={logoSlack} name="Math" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -134,17 +108,12 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            Not set
+            30%
           </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={100} color="success" variant="gradient" label={false} />
-          </MDBox>
         ),
       },
       {
-        companies: <Company image={logoSpotify} name="Launch our Mobile App" />,
+        companies: <Company image={logoSpotify} name="System architecture" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -157,17 +126,12 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $20,500
+            70%
           </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={100} color="success" variant="gradient" label={false} />
-          </MDBox>
         ),
       },
       {
-        companies: <Company image={logoJira} name="Add the New Pricing Page" />,
+        companies: <Company image={logoJira} name="Infomation System" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([[team4, "Jessica Doe"]])}
@@ -175,17 +139,12 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $500
+            50%
           </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={25} color="info" variant="gradient" label={false} />
-          </MDBox>
         ),
       },
       {
-        companies: <Company image={logoInvesion} name="Redesign New Online Shop" />,
+        companies: <Company image={logoInvesion} name="English" />,
         members: (
           <MDBox display="flex" py={1}>
             {avatars([
@@ -196,13 +155,8 @@ export default function data() {
         ),
         budget: (
           <MDTypography variant="caption" color="text" fontWeight="medium">
-            $2,000
+            50%
           </MDTypography>
-        ),
-        completion: (
-          <MDBox width="8rem" textAlign="left">
-            <MDProgress value={40} color="info" variant="gradient" label={false} />
-          </MDBox>
         ),
       },
     ],

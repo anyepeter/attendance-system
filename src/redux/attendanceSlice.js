@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "aws-amplify";
-import { listUsers, listCourses, listDays, listAttendances } from "../graphql/queries";
+import {
+     listUsers,
+     listCourses, listDays, listAttends, listEnrolls
+     } from "../graphql/queries";
 
-// Async thunk for fetching all users
+//Async thunk for fetching all users
 export const fetchAllUsers = createAsyncThunk('user/fetchAllUsers', async () => {
     try {
         const response = await API.graphql({
@@ -14,7 +17,7 @@ export const fetchAllUsers = createAsyncThunk('user/fetchAllUsers', async () => 
     }
 });
 
-// Async thunk for fetching all courses
+// // Async thunk for fetching all courses
 export const fetchAllCourses = createAsyncThunk('user/fetchAllCourses', async () => {
     try {
         const response = await API.graphql({
@@ -26,7 +29,7 @@ export const fetchAllCourses = createAsyncThunk('user/fetchAllCourses', async ()
     }
 });
 
-// Async thunk for fetching all days
+
 export const fetchAllDays = createAsyncThunk('user/fetchAllDays', async () => {
     try {
         const response = await API.graphql({
@@ -38,17 +41,29 @@ export const fetchAllDays = createAsyncThunk('user/fetchAllDays', async () => {
     }
 });
 
-// Async thunk for fetching all attendances
+// // Async thunk for fetching all attendances
 export const fetchAllAttendances = createAsyncThunk('user/fetchAllAttendances', async () => {
     try {
         const response = await API.graphql({
-            query: listAttendances
+            query: listAttends
         });
         return response.data.listAttendances.items;
     } catch (error) {
         throw error;
     }
 });
+
+export const fetchAllEnrollments = createAsyncThunk('user/fetchAllEnrollment', async () => {
+    try {
+        const response = await API.graphql({
+            query: listEnrolls
+        });
+        return response.data.listEnrolls.items;
+    } catch (error) {
+        throw error;
+    }
+})
+
 
 export const userSlice = createSlice({
     name: "user",
@@ -58,14 +73,12 @@ export const userSlice = createSlice({
         allCourses: [],
         allDays: [],
         allAttend: [],
+        allEnroll: [],
     },
     reducers: {
         login: (state, action) => {
             state.user = action.payload;
             console.log(state.user);
-        },
-        showAllUsers: (state, action) => {
-            state.allUser = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -86,5 +99,4 @@ export const userSlice = createSlice({
 });
 
 export const { login } = userSlice.actions;
-export const { showAllUsers } = userSlice.actions;
 export default userSlice.reducer;

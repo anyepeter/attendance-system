@@ -1,16 +1,16 @@
 {
-  "staging": {
+  "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-amplify95898e02c4004-staging-194524-authRole",
-      "UnauthRoleArn": "arn:aws:iam::633211861656:role/amplify-amplify95898e02c4004-staging-194524-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::633211861656:role/amplify-amplify95898e02c4004-staging-194524-authRole",
+      "AuthRoleName": "amplify-attendancesystem-dev-00326-authRole",
+      "UnauthRoleArn": "arn:aws:iam::633211861656:role/amplify-attendancesystem-dev-00326-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::633211861656:role/amplify-attendancesystem-dev-00326-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-amplify95898e02c4004-staging-194524-deployment",
-      "UnauthRoleName": "amplify-amplify95898e02c4004-staging-194524-unauthRole",
-      "StackName": "amplify-amplify95898e02c4004-staging-194524",
-      "StackId": "arn:aws:cloudformation:us-east-2:633211861656:stack/amplify-amplify95898e02c4004-staging-194524/b13f6ab0-8001-11ee-b24d-02d7fb8eb319",
-      "AmplifyAppId": "dc7h9v8hnqt32",
-      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-amplify95898e02c4004-staging-194524-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+      "DeploymentBucketName": "amplify-attendancesystem-dev-00326-deployment",
+      "UnauthRoleName": "amplify-attendancesystem-dev-00326-unauthRole",
+      "StackName": "amplify-attendancesystem-dev-00326",
+      "StackId": "arn:aws:cloudformation:us-east-2:633211861656:stack/amplify-attendancesystem-dev-00326/dc6b3450-872f-11ee-94ef-0ad6e4c851c9",
+      "AmplifyAppId": "d2zopeotx166st",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-attendancesystem-dev-00326-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
@@ -18,8 +18,8 @@
       },
       "function": {
         "attendancesystemPreSignup": {
-          "deploymentBucketName": "amplify-amplify95898e02c4004-staging-194524-deployment",
-          "s3Key": "amplify-builds/attendancesystemPreSignup-464c6851365166707263-build.zip"
+          "deploymentBucketName": "amplify-attendancesystem-dev-00326-deployment",
+          "s3Key": "amplify-builds/attendancesystemPreSignup-61355267375a6a456932-build.zip"
         }
       },
       "api": {

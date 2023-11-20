@@ -43,10 +43,12 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { Auth } from 'aws-amplify';
+import { useDispatch } from "react-redux";
 
 //Notification
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { login } from "redux/attendanceSlice";
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -55,6 +57,7 @@ function Basic() {
   const [error, setError] = useState(false);
   const notify = () => toast("Wow so easy!");
   const badText = () => toast("Wrong text!");
+  const dispatch = useDispatch()
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
@@ -81,8 +84,11 @@ function Basic() {
       await Auth.signIn(userInfo);
       setTimeout(() => {
         window.location.load(navigate('/dashboard'));
-      }, 1000);
+        
+      }, 2000);
       setFormSubmit(false);
+      const user = await Auth.currentAuthenticatedUser({ bypassCache: false });
+      dispatch(login(user.attributes))
     } catch (err) {
       console.log(err);
       setError(true);

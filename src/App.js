@@ -46,7 +46,9 @@ import "@aws-amplify/ui-react/styles.css";
 import Verify from "layouts/authentication/verify";
 import Basic from "layouts/authentication/sign-in";
 import Cover from "layouts/authentication/sign-up";
-import { useDispatch } from 'react-redux';
+import AddTable from "layouts/tables/addTable";
+
+import { useDispatch } from "react-redux";
 import { login } from "redux/attendanceSlice";
 
 
@@ -65,6 +67,7 @@ import { login } from "redux/attendanceSlice";
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  const dispatchRedux = useDispatch()
 
 
   // Cache for the rtl
@@ -95,15 +98,15 @@ import { login } from "redux/attendanceSlice";
 
   const [loading, setLoading] = useState(true);
 
-  const [userInfo, setUserData] = useState({});
-  const dispatchRedux = useDispatch();
+  const [userInfo, setUserData] = useState('');
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const user = await Auth.currentAuthenticatedUser({ bypassCache: false });
         setUserData(user.attributes);
-        dispatchRedux(login(user.attributes));
+        dispatchRedux(login(user.attributes))
       } catch (err) {
         console.log(err);
       } finally {
@@ -115,8 +118,8 @@ import { login } from "redux/attendanceSlice";
   }, []);
 
  
-
  const isAuthenticated = !!userInfo;
+ console.log(isAuthenticated, userInfo)
   
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
 
@@ -211,7 +214,7 @@ const getRoutes = (allRoutes) =>
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
+            brandName="Attendance System"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -228,8 +231,9 @@ const getRoutes = (allRoutes) =>
           }
         <Route path="/" element={<Basic />} />
         <Route path="*" element={<Navigate to="/" />} />
-        <Route path="/signUp" element={<Cover />} />
+        <Route path="/authentication/sign-up" element={<Cover />} />
         <Route path='/verify' element={<Verify /> } />
+        <Route path="/addCourse" element={<AddTable />} />
       </Routes>
     </ThemeProvider>
   );
