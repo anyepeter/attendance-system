@@ -3,6 +3,7 @@ import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import Profile from "layouts/profile";
+import Enroll from "layouts/enroll";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -24,14 +25,22 @@ const routes = [
     route: "/tables",
     component: <Tables />,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Billing",
-  //   key: "billing",
-  //   icon: <Icon fontSize="small">receipt_long</Icon>,
-  //   route: "/billing",
-  //   component: <Billing />,
-  // },
+  {
+    type: "collapse",
+    name: "Enroll",
+    key: "Enroll",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/enrolls",
+    component: <Enroll />,
+  },
+  {
+    type: "collapse",
+    name: "Billing",
+    key: "billing",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/billing",
+    component: <Billing />,
+  },
   // {
   //   type: "collapse",
   //   name: "Profile",

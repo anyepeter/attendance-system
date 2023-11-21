@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "aws-amplify";
 import {
      listUsers,
-     listCourses, listDays, listAttends, listEnrolls
+     listCourses, listDays, listAttends, listEnrolls, listUserCourses
      } from "../graphql/queries";
 
 //Async thunk for fetching all users
@@ -64,6 +64,17 @@ export const fetchAllEnrollments = createAsyncThunk('user/fetchAllEnrollment', a
     }
 })
 
+export const fetchAllUserCourse = createAsyncThunk('user/fetchAllEnrollment', async () => {
+    try {
+        const response = await API.graphql({
+            query: listUserCourses,
+        });
+        return response.data.listUserCourses.items;
+    } catch (error) {
+        throw error;
+    }
+})
+
 
 export const userSlice = createSlice({
     name: "user",
@@ -74,6 +85,7 @@ export const userSlice = createSlice({
         allDays: [],
         allAttend: [],
         allEnroll: [],
+        allUserCourse: [],
     },
     reducers: {
         login: (state, action) => {
@@ -94,7 +106,12 @@ export const userSlice = createSlice({
             })
             .addCase(fetchAllAttendances.fulfilled, (state, action) => {
                 state.allAttend = action.payload;
+            })
+            .addCase(fetchAllUserCourse.fulfilled, (state, action) => {
+                state.allUserCourse = action.payload;
+
             });
+            
     },
 });
 

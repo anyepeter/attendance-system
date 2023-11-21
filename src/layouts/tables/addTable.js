@@ -56,7 +56,7 @@ function AddTable() {
       });
 
       // Extract the course ID from the response
-      const courseId = createCourseResponse.data.createCourse.code;
+      const courseId = createCourseResponse.data.createCourse.id;
 
       try {
         // Create the course user
@@ -70,7 +70,7 @@ function AddTable() {
           },
         });
         console.log(createCourseUserResponse.data)
-        navigate('/tables');
+       window.location.reload(navigate('/tables'));
       }
       catch (error) {
         console.error('Error creating course:', error);

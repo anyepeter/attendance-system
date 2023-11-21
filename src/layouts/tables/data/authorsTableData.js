@@ -50,23 +50,23 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "employed", accessor: "employed", align: "center" },
+      { Header: "student", accessor: "student", width: "45%", align: "left" },
+      { Header: "course_code", accessor: "course_code", align: "left" },
+      { Header: "attendance", accessor: "attendance", align: "center" },
+      { Header: "day", accessor: "day", align: "center" },
       { Header: "action", accessor: "action", align: "center" },
     ],
 
     rows: [
       {
-        author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
-        function: <Job title="Manager" description="Organization" />,
-        status: (
+        student: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+        course_code: <Job title="Manager" description="Organization" />,
+        attendance: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        day: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             23/04/18
           </MDTypography>
@@ -76,7 +76,7 @@ export default function data() {
             Edit
           </MDTypography>
         ),
-      },
+      },  
       {
         author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
         function: <Job title="Programator" description="Developer" />,

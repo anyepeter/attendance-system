@@ -1,19 +1,4 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
@@ -25,7 +10,7 @@ import { IoMdAdd } from "react-icons/io";
 import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 
-// Material Dashboard 2 React example components
+// Material Dashboard 2 React example components 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
@@ -46,7 +31,8 @@ import { fetchAllUserCourse } from "redux/attendanceSlice";
 
 
 
-function Tables() {
+
+function Enroll() {
   const { columns } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
   const dispatch = useDispatch()
@@ -54,19 +40,9 @@ function Tables() {
   const courses = useSelector((state) => state.user.allCourses)
   const allCourseUsers = useSelector((state) => state.user.allUserCourse)
   const user = useSelector((state) => state.user.user.email)
-  console.log(courses, allCourseUsers, user)
+  const userType = useSelector((state) => state.user.user)
   const allUsers = useSelector((state) => state.user.allUser)
   const allEnrolls = useSelector((state) => state.user.allEnroll)
-
-
-console.log(allUsers, allEnrolls)
-
-
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    navigate('/addCourse')
-  }
 
   useEffect(() => {
    dispatch(fetchAllCourses())
@@ -99,18 +75,6 @@ console.log(allUsers, allEnrolls)
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox pt={4} pb={3}>
-      <MDButton
-               variant="gradient" 
-               type="submit"
-                color="info"
-                 mb="5"
-                 sx={{
-                  marginBottom: "5rem"
-                 }} 
-                 
-                 onClick={handleClick}>
-                <IoMdAdd />
-              </MDButton>
         <Grid container spacing={6}>
 {
   allCourseUsers.map((element) => {
@@ -137,7 +101,7 @@ console.log(allUsers, allEnrolls)
               <MDBox pt={3}>
                 {
                   allEnrolls.map((element) => {
-                    if(element.courseID === course.id && element.status === true ) {
+                    if(element.courseID === course.id && element.status === false ) {
                       return allUsers.map((userEl) => {
                         if(userEl.id === element.userID) {
                           return(
@@ -146,16 +110,6 @@ console.log(allUsers, allEnrolls)
                               {
                                 student: <Author image={team2} name={userEl.name} email={userEl.email} />,
                                 course_code: <Job title={course.title} description={course.code} />,
-                                attendance: (
-                                  <MDBox ml={-1}>
-                                    <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-                                  </MDBox>
-                                ),
-                                day: (
-                                  <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-                                    23/04/18
-                                  </MDTypography>
-                                ),
                                 action: (
                                   <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
                                     Edit
@@ -186,33 +140,6 @@ console.log(allUsers, allEnrolls)
   })
 }
 
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Projects Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
-          </Grid>
         </Grid>
       </MDBox>
       <Footer />
@@ -220,4 +147,4 @@ console.log(allUsers, allEnrolls)
   );
 }
 
-export default Tables;
+export default Enroll;
